@@ -121,192 +121,126 @@ public class EnerLyzeApp extends JFrame {
         setVisible(true);
     }
 
-    // ═════════════════════════════════════════════════════════════════════════
-    //  SIDEBAR
+  // ═════════════════════════════════════════════════════════════════════════
+    //  SIDEBAR  — deep navy vertical nav strip
     // ═════════════════════════════════════════════════════════════════════════
     private JPanel buildSidebar() {
-        JPanel sidebar = new JPanel() {
-            @Override protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                Graphics2D g2 = (Graphics2D) g.create();
-                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                // Subtle gradient overlay on right edge
-                GradientPaint gp = new GradientPaint(getWidth() - 1, 0, new Color(99, 102, 241, 15),
-                                                     getWidth(), 0, new Color(99, 102, 241, 0));
-                g2.setPaint(gp);
-                g2.fillRect(0, 0, getWidth(), getHeight());
-                // Right border accent
-                g2.setColor(new Color(99, 102, 241, 40));
-                g2.drawLine(getWidth() - 1, 0, getWidth() - 1, getHeight());
-                g2.dispose();
-            }
-        };
+        JPanel sidebar = new JPanel();
         sidebar.setBackground(BG_SIDEBAR);
         sidebar.setLayout(new BoxLayout(sidebar, BoxLayout.Y_AXIS));
-        sidebar.setPreferredSize(new Dimension(260, 0));
-
-        // Brand block with gradient logo text effect
+        sidebar.setPreferredSize(new Dimension(300, 0));
+ 
+        // ── Brand block (fully centred) ───────────────────────────────────────
         JPanel brand = new JPanel();
         brand.setOpaque(false);
         brand.setLayout(new BoxLayout(brand, BoxLayout.Y_AXIS));
-        brand.setBorder(new EmptyBorder(15, 20, 20, 20));
-        brand.setAlignmentX(Component.LEFT_ALIGNMENT);
-        brand.setMaximumSize(null);
-        brand.setPreferredSize(new Dimension(200, 120));
-
-        // Logo with large lightning bolt
-        JPanel logoRow = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 5));
-        logoRow.setOpaque(false);
-        JLabel boltLbl = new JLabel("⚡") {
+        brand.setBorder(new EmptyBorder(44, 20, 36, 20));
+        brand.setAlignmentX(Component.CENTER_ALIGNMENT);
+        brand.setMaximumSize(new Dimension(Integer.MAX_VALUE, 180));
+ 
+        // Row 1 — ⚡ EnerLyze
+        JLabel logoLbl = new JLabel("⚡ EnerLyze");
+        logoLbl.setFont(new Font("SansSerif", Font.BOLD, 30));
+        logoLbl.setForeground(Color.WHITE);
+        logoLbl.setAlignmentX(Component.CENTER_ALIGNMENT);
+        logoLbl.setHorizontalAlignment(SwingConstants.CENTER);
+ 
+        // Row 2 — Smart Energy Analyzer
+        JLabel tagLbl = new JLabel("Smart Energy Analyzer");
+        tagLbl.setFont(new Font("SansSerif", Font.PLAIN, 15));
+        tagLbl.setForeground(new Color(148, 163, 200));
+        tagLbl.setAlignmentX(Component.CENTER_ALIGNMENT);
+        tagLbl.setHorizontalAlignment(SwingConstants.CENTER);
+        tagLbl.setBorder(new EmptyBorder(10, 0, 0, 0));
+ 
+        // Row 3 — 🔔 Notifications chip
+        JPanel notifWrap = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        notifWrap.setOpaque(false);
+        notifWrap.setAlignmentX(Component.CENTER_ALIGNMENT);
+        notifWrap.setMaximumSize(new Dimension(Integer.MAX_VALUE, 46));
+        notifWrap.setBorder(new EmptyBorder(14, 0, 0, 0));
+ 
+        JLabel notifChip = new JLabel("🔔  Notifications") {
             @Override protected void paintComponent(Graphics g) {
                 Graphics2D g2 = (Graphics2D) g.create();
                 g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                // Glow behind bolt
-                g2.setColor(new Color(99, 102, 241, 60));
-                g2.fillOval(-4, -2, getWidth() + 8, getHeight() + 4);
-                super.paintComponent(g);
+                g2.setColor(new Color(40, 58, 120));
+                g2.fillRoundRect(0, 0, getWidth(), getHeight(), getHeight(), getHeight());
                 g2.dispose();
+                super.paintComponent(g);
             }
         };
-        boltLbl.setFont(new Font("SansSerif", Font.BOLD, 26));
-        JLabel nameLbl = new JLabel("<html><b>EnerLyze</b></html>");
-        nameLbl.setFont(new Font("SansSerif", Font.BOLD, 22));
-        nameLbl.setForeground(Color.WHITE);
-        logoRow.add(boltLbl);
-        logoRow.add(nameLbl);
-        nameLbl.setPreferredSize(new Dimension(140, 30));
-
-        JLabel subLbl = new JLabel("<html><div style='text-align:left;'>Smart Energy Analyzer</div></html>");
-        subLbl.setFont(new Font("SansSerif", Font.PLAIN, 12));
-subLbl.setForeground(new Color(120, 140, 180));
-subLbl.setAlignmentX(Component.LEFT_ALIGNMENT);
-        subLbl.setBorder(new EmptyBorder(6, 0, 0, 0));
-
-        brand.add(logoRow);
-        brand.add(subLbl);
+        notifChip.setFont(new Font("SansSerif", Font.PLAIN, 14));
+        notifChip.setForeground(new Color(203, 213, 225));
+        notifChip.setOpaque(false);
+        notifChip.setHorizontalAlignment(SwingConstants.CENTER);
+        notifChip.setBorder(new EmptyBorder(8, 22, 8, 22));
+        notifWrap.add(notifChip);
+ 
+        brand.add(logoLbl);
+        brand.add(tagLbl);
+        brand.add(notifWrap);
         sidebar.add(brand);
-
-        // Section label
-        JLabel navLabel = new JLabel("NAVIGATION");
-        navLabel.setFont(new Font("SansSerif", Font.BOLD, 12));
-        navLabel.setForeground(new Color(120, 145, 180));
-        navLabel.setBorder(new EmptyBorder(10, 24, 10, 0));
-        navLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        navLabel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 24));
-        sidebar.add(navLabel);
-
-        // Nav items
+ 
+        // ── Divider ───────────────────────────────────────────────────────────
+        JSeparator divider = new JSeparator();
+        divider.setForeground(new Color(40, 58, 120));
+        divider.setMaximumSize(new Dimension(Integer.MAX_VALUE, 1));
+        sidebar.add(divider);
+        sidebar.add(Box.createVerticalStrut(18));
+ 
+        // ── Nav items ─────────────────────────────────────────────────────────
         String[][] items = {
             { "🏠", "Home",    SCREEN_HOME,    "0" },
-            { "✏️", "Input",   SCREEN_INPUT,   "1" },
+            { "📝", "Input",   SCREEN_INPUT,   "1" },
             { "🎯", "Results", SCREEN_RESULT,  "2" },
             { "📜", "History", SCREEN_HISTORY, "3" }
         };
-
+ 
         for (String[] item : items) {
             int idx = Integer.parseInt(item[3]);
             navButtons[idx] = buildNavButton(item[0], item[1], item[2], idx);
             JPanel wrap = new JPanel(new BorderLayout());
             wrap.setOpaque(false);
-            wrap.setMaximumSize(new Dimension(Integer.MAX_VALUE, 70));
-            wrap.setBorder(new EmptyBorder(1, 8, 1, 8));
+            wrap.setMaximumSize(new Dimension(Integer.MAX_VALUE, 66));
             wrap.add(navButtons[idx]);
             sidebar.add(wrap);
+            sidebar.add(Box.createVerticalStrut(6));
         }
-
-        sidebar.add(Box.createVerticalStrut(16));
-
-        // Separator
-        JPanel sep = new JPanel() {
-            @Override protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                g.setColor(new Color(30, 40, 65));
-                g.drawLine(20, 0, getWidth() - 20, 0);
-            }
-        };
-        sep.setOpaque(false);
-        sep.setMaximumSize(new Dimension(Integer.MAX_VALUE, 1));
-        sep.setPreferredSize(new Dimension(0, 1));
-        sidebar.add(sep);
-
+ 
+        // No footer — sidebar ends here
         sidebar.add(Box.createVerticalGlue());
-
-        // Record count badge
-        JPanel footer = new JPanel();
-        footer.setOpaque(false);
-        footer.setLayout(new BoxLayout(footer, BoxLayout.Y_AXIS));
-        footer.setBorder(new EmptyBorder(16, 18, 28, 18));
-        footer.setMaximumSize(new Dimension(Integer.MAX_VALUE, 90));
-        footer.setAlignmentX(Component.LEFT_ALIGNMENT);
-
-        JPanel badge = new JPanel(new FlowLayout(FlowLayout.LEFT, 6, 4)) {
-            @Override protected void paintComponent(Graphics g) {
-                Graphics2D g2 = (Graphics2D) g.create();
-                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                g2.setColor(new Color(22, 30, 55));
-                g2.fillRoundRect(0, 0, getWidth(), getHeight(), 10, 10);
-                g2.setColor(new Color(40, 55, 90));
-                g2.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 10, 10);
-                g2.dispose();
-            }
-        };
-        badge.setOpaque(false);
-        JLabel recLbl = new JLabel("📦  " + records.size() + " records");
-        recLbl.setFont(new Font("SansSerif", Font.BOLD, 11));
-        recLbl.setForeground(new Color(100, 130, 180));
-        badge.add(recLbl);
-        badge.setMaximumSize(new Dimension(Integer.MAX_VALUE, 36));
-
-        JLabel versionLbl = new JLabel("v1.0 · Local Storage");
-        versionLbl.setFont(new Font("SansSerif", Font.PLAIN, 10));
-        versionLbl.setForeground(new Color(50, 65, 100));
-        versionLbl.setBorder(new EmptyBorder(6, 2, 0, 0));
-        versionLbl.setAlignmentX(Component.LEFT_ALIGNMENT);
-
-        footer.add(badge);
-        footer.add(versionLbl);
-        sidebar.add(footer);
-
+ 
         return sidebar;
     }
-
+ 
     private JButton buildNavButton(String icon, String label, String key, int idx) {
-        JButton btn = new JButton("<html><div style='text-align:left;'>"
-        + "<span style='font-size:16px'>" + icon + "</span>"
-        + "&nbsp;&nbsp;<span style='font-size:13px'>" + label + "</span>"
-        + "</div></html>") {
+        JButton btn = new JButton("<html><span style='font-size:16px'>"
+                                 + icon + "</span>&nbsp;&nbsp;" + label + "</html>") {
             @Override protected void paintComponent(Graphics g) {
                 Graphics2D g2 = (Graphics2D) g.create();
                 g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                 if (getBackground().equals(BG_SIDEBAR_SEL)) {
-                    // Selected: indigo fill with glow
-                    g2.setColor(new Color(99, 102, 241, 30));
-                    g2.fillRoundRect(0, 2, getWidth(), getHeight() - 4, 12, 12);
                     g2.setColor(BG_SIDEBAR_SEL);
-                    g2.fillRoundRect(2, 3, getWidth() - 4, getHeight() - 6, 10, 10);
-                    // Left accent bar
-                    g2.setColor(new Color(167, 169, 255));
-                    g2.fillRoundRect(2, 8, 4, getHeight() - 16, 4, 4);
+                    g2.fillRoundRect(10, 4, getWidth() - 20, getHeight() - 8, 12, 12);
                 } else if (getModel().isRollover()) {
                     g2.setColor(BG_SIDEBAR_HOV);
-                    g2.fillRoundRect(2, 3, getWidth() - 4, getHeight() - 6, 10, 10);
+                    g2.fillRoundRect(10, 4, getWidth() - 20, getHeight() - 8, 12, 12);
                 }
                 g2.dispose();
                 super.paintComponent(g);
             }
         };
-        btn.setFont(FONT_NAV);
+        btn.setFont(new Font("SansSerif", Font.BOLD, 16));
         btn.setForeground(TEXT_SIDEBAR);
         btn.setBackground(BG_SIDEBAR);
         btn.setHorizontalAlignment(SwingConstants.LEFT);
-       btn.setBorder(new EmptyBorder(10, 16, 10, 12));
+        btn.setBorder(new EmptyBorder(14, 28, 14, 24));
         btn.setFocusPainted(false);
         btn.setContentAreaFilled(false);
         btn.setOpaque(false);
         btn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         btn.addActionListener(e -> navigateTo(key, idx));
-        btn.setPreferredSize(new Dimension(180, 60));
-        btn.setVerticalAlignment(SwingConstants.CENTER);
         btn.addMouseListener(new MouseAdapter() {
             @Override public void mouseEntered(MouseEvent e) { btn.repaint(); }
             @Override public void mouseExited(MouseEvent e)  { btn.repaint(); }
@@ -346,7 +280,7 @@ subLbl.setAlignmentX(Component.LEFT_ALIGNMENT);
         }
     }
 
-    // ═════════════════════════════════════════════════════════════════════════
+ // ═════════════════════════════════════════════════════════════════════════
     //  SCREEN 1 — HOME
     // ═════════════════════════════════════════════════════════════════════════
     private JPanel buildHomeScreen() {
@@ -383,45 +317,12 @@ subLbl.setAlignmentX(Component.LEFT_ALIGNMENT);
         col.setLayout(new BoxLayout(col, BoxLayout.Y_AXIS));
         col.setBorder(new EmptyBorder(10, 0, 20, 0));
 
-        // Big lightning bolt visual
-        JLabel heroEmoji = new JLabel("⚡") {
-            @Override protected void paintComponent(Graphics g) {
-                Graphics2D g2 = (Graphics2D) g.create();
-                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                // Glow circle behind
-                RadialGradientPaint rg = new RadialGradientPaint(
-                    new Point2D.Float(getWidth() / 2f, getHeight() / 2f),
-                    getHeight() / 1.4f,
-                    new float[]{0f, 1f},
-                    new Color[]{new Color(99, 102, 241, 80), new Color(99, 102, 241, 0)}
-                );
-                g2.setPaint(rg);
-                g2.fillOval(0, 0, getWidth(), getHeight());
-                g2.dispose();
-                super.paintComponent(g);
-            }
-        };
-        heroEmoji.setFont(new Font("SansSerif", Font.PLAIN, 80));
-        heroEmoji.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-        JLabel heroTitle = new JLabel("EnerLyze") {
-            @Override protected void paintComponent(Graphics g) {
-                Graphics2D g2 = (Graphics2D) g.create();
-                g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_LCD_HRGB);
-                // Gradient text effect simulation via clip
-                g2.setFont(getFont());
-                FontMetrics fm = g2.getFontMetrics();
-                GradientPaint gp = new GradientPaint(0, 0, new Color(167, 169, 255),
-                                                     getWidth(), 0, new Color(232, 121, 249));
-                g2.setPaint(gp);
-                g2.setFont(getFont());
-                g2.drawString(getText(), 0, fm.getAscent());
-                g2.dispose();
-            }
-        };
-        heroTitle.setFont(FONT_HERO);
-        heroTitle.setForeground(Color.WHITE);
+        // Hero logo — matches sidebar brand style
+        JLabel heroTitle = new JLabel("⚡ EnerLyze");
+        heroTitle.setFont(new Font("SansSerif", Font.BOLD, 52));
+        heroTitle.setForeground(TEXT_PRIMARY);
         heroTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
+        heroTitle.setHorizontalAlignment(SwingConstants.CENTER);
 
         JLabel heroSub = new JLabel("Your Smart Daily Energy Analyzer");
         heroSub.setFont(new Font("SansSerif", Font.PLAIN, 16));
@@ -461,8 +362,6 @@ subLbl.setAlignmentX(Component.LEFT_ALIGNMENT);
         howRow.add(buildStepChip("② Analyze", "Score & tips", PURPLE));
         howRow.add(buildStepChip("③ Improve", "Track progress", PINK));
 
-        col.add(heroEmoji);
-        col.add(Box.createVerticalStrut(2));
         col.add(heroTitle);
         col.add(Box.createVerticalStrut(10));
         col.add(heroSub);
