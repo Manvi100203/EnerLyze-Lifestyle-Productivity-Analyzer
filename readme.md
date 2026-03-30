@@ -4,11 +4,6 @@
 ### Smart Daily Energy Analyzer
 *A Java Swing Desktop Application*
 
-![Java](https://img.shields.io/badge/Java-8%2B-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
-![Swing](https://img.shields.io/badge/GUI-Java%20Swing-6366F1?style=for-the-badge)
-![License](https://img.shields.io/badge/License-MIT-22c55e?style=for-the-badge)
-![Status](https://img.shields.io/badge/Status-Complete-22c55e?style=for-the-badge)
-
 > **Analyze your daily lifestyle habits and get an instant energy score — helping you understand how sleep, work, and screen time shape your productivity.**
 
 </div>
@@ -121,16 +116,6 @@ Then simply **double-click `run.bat`** to compile and launch.
 
 ---
 
-### Option C — IDE Setup
-
-| IDE | Steps |
-|-----|-------|
-| **IntelliJ IDEA** | File → Open → select the `EnerLyze/` folder → right-click `EnerLyzeApp.java` → Run |
-| **Eclipse** | File → New → Java Project → add all `.java` files → Run As → Java Application |
-| **VS Code** | Open folder → install *Extension Pack for Java* → click ▶ Run on `EnerLyzeApp.java` |
-
----
-
 ## 🎮 How to Use
 
 ```
@@ -227,23 +212,6 @@ EnerLyze uses a **100-point weighted scoring system** across three dimensions:
 │                            │  📉 Dropped by 8 pts vs last       │
 └────────────────────────────┴─────────────────────────────────────┘
 ```
-
-### Visual Design Details
-
-| Element | Detail |
-|---------|--------|
-| Background | `#0F111A` near-black dark theme |
-| Card colour | `#1A1D2B` elevated surfaces |
-| Accent colour | `#6366F1` indigo for buttons and highlights |
-| Score — High | 🟢 `#34D399` emerald green |
-| Score — Moderate | 🟡 `#FBBF24` amber yellow |
-| Score — Low | 🔴 `#F87171` soft red |
-| Input valid | Green border on field |
-| Input invalid | Red border + error dialog |
-| Buttons | Hover effect changes shade on mouse-over |
-| Input fields | Placeholder text clears on focus |
-
----
 
 ## 📐 Java Concepts Covered
 
@@ -370,12 +338,6 @@ sleepHours,workHours,screenTime,energyScore,status,timestamp
 This project is released under the **MIT License** — free to use, modify, and distribute for personal or academic purposes.
 
 ---
-
-<div align="center">
-
-Made with ☕ and Java &nbsp;·&nbsp; EnerLyze v1.0
-
-*Stay powered. Stay balanced. ⚡*
 
 </div>
 
