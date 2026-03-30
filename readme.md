@@ -339,5 +339,11 @@ This project is released under the **MIT License** — free to use, modify, and 
 
 ---
 
+<div align="center">
+
+*Stay powered. Stay balanced. ⚡*
+
+</div>
+
 </div>
 
